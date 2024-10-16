@@ -1,0 +1,6 @@
+passed\tchange1
+upon\tchange2
+stairs\tchange3
+surprise\tchange4
+thought\tchange5
+alone\tchange6
