@@ -60,7 +60,7 @@ void read_dictionary(const std::string& path, std::vector<word_pair_t>& target) 
     std::string cache_line;
 
     while (getline(file, cache_line)) {
-        size_t pos = cache_line.find("\t");
+        size_t pos = cache_line.find("\\t");
         word_pair_t pair = { cache_line.substr(0, pos), cache_line.substr(pos + 2) };
         target.push_back(pair);
     }
@@ -88,11 +88,12 @@ int main() {
   
     std::string cache_string = "";
 
-    while (cache_string.empty()) 
-        std::getline(std::cin, cache_string);
-
-    change_all_words(cache_string, word_pairs);
-    std::cout << cache_string << std::endl;
+    while (!std::getline(std::cin, cache_string).eof()) {
+        if (!cache_string.empty()) {
+            change_all_words(cache_string, word_pairs);
+            std::cout << cache_string << std::endl;
+        }
+    }
   
     std::cerr << "[ + ] Done" << std::endl;
     system("pause");
