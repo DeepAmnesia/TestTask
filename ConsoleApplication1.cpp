@@ -69,10 +69,10 @@ void read_dictionary(const std::string& path, std::vector<word_pair_t>& target) 
 }
 
 void print_dictionary(std::vector<word_pair_t>& reserve_dictionary) {
-    std::cout << "[ ~ ] Current dictionary:" << std::endl;
+    std::cerr << "[ ~ ] Current dictionary:" << std::endl;
 
     for (auto& str : reserve_dictionary) {
-        std::cout << "[" << str.first << " | " << str.second << "]" << std::endl;
+        std::cerr << "[" << str.first << " | " << str.second << "]" << std::endl;
     }
 }
 
@@ -80,24 +80,21 @@ int main() {
     std::vector<word_pair_t> word_pairs = { };
     read_dictionary("words.txt", word_pairs);
 
-    std::cout << "[ + ] Dictionary read sucessfully" << std::endl;
+    std::cerr << "[ + ] Dictionary read sucessfully" << std::endl;
 
     print_dictionary(word_pairs);
 
-    std::cout << "[ ~ ] Input strings: " << std::endl;
+    std::cerr << "[ ~ ] Input strings: " << std::endl;
   
     std::string cache_string = "";
-    while (std::getline(std::cin, cache_string)) {
-        if (strcmp(cache_string.c_str(), "\\n") != 0) {
-            if (!cache_string.empty()) {
-                change_all_words(cache_string, word_pairs);
-                std::cout << cache_string << std::endl;
-            }
-        }
-        else break;
-    }
 
-    std::cout << "[ + ] Done" << std::endl;
+    while (cache_string.empty()) 
+        std::getline(std::cin, cache_string);
+
+    change_all_words(cache_string, word_pairs);
+    std::cout << cache_string << std::endl;
+  
+    std::cerr << "[ + ] Done" << std::endl;
     system("pause");
 
     return 0;
