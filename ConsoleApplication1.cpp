@@ -60,7 +60,7 @@ void read_dictionary(const std::string& path, std::vector<word_pair_t>& target) 
     std::string cache_line;
 
     while (getline(file, cache_line)) {
-        size_t pos = cache_line.find("\\t");
+        size_t pos = cache_line.find("\t");
         word_pair_t pair = { cache_line.substr(0, pos), cache_line.substr(pos + 2) };
         target.push_back(pair);
     }
