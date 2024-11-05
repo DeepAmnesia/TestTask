@@ -39,7 +39,7 @@ std::string compile_string(std::vector<std::string>& list_of_words) {
     return resilt;
 }
 
-std::string& change_all_words(std::string& str, std::vector<word_pair_t>& reserve_dictionary) {
+void change_all_words(std::string& str, std::vector<word_pair_t>& reserve_dictionary) {
     if (!str.empty()) {
 
         std::vector<std::string> words = { };
@@ -68,20 +68,6 @@ void read_dictionary(const std::string& path, std::vector<word_pair_t>& target) 
     file.close();
 }
 
-void read_strings(const std::string& end, std::vector<word_pair_t>& reserve_dictionary) {
-    std::string cache_string = "";
-
-    while (std::getline(std::cin, cache_string)) {
-        if (strcmp(cache_string.c_str(), end.c_str()) != 0) {
-            if (!cache_string.empty()) {
-                change_all_words(cache_string, reserve_dictionary);
-                std::cout << cache_string << std::endl;
-            }
-        }
-        else break;
-    }
-}
-
 void print_dictionary(std::vector<word_pair_t>& reserve_dictionary) {
     std::cout << "[ ~ ] Current dictionary:" << std::endl;
 
@@ -100,7 +86,16 @@ int main() {
 
     std::cout << "[ ~ ] Input strings: " << std::endl;
   
-    read_strings("\\n", word_pairs);
+    std::string cache_string = "";
+    while (std::getline(std::cin, cache_string)) {
+        if (strcmp(cache_string.c_str(), "\\n") != 0) {
+            if (!cache_string.empty()) {
+                change_all_words(cache_string, word_pairs);
+                std::cout << cache_string << std::endl;
+            }
+        }
+        else break;
+    }
 
     std::cout << "[ + ] Done" << std::endl;
     system("pause");
